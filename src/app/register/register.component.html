@@ -1,0 +1,63 @@
+<div class="container">
+    <h3 class="mb-3">Join Us Now:</h3>
+    <form (ngSubmit)="register(registerationForm)" [formGroup]="registerationForm">
+        <!-- <h3>{{registerationForm.get('name')?.getError('minlength')|json}}</h3> -->
+        <!-- <h3 *ngIf="errorMessage">{{errorMessage}}</h3> -->
+        <div>
+            <label for="name">Name:</label>
+            <input formControlName="name" type="text" id="name" class="form-control mb-3">
+        </div>
+        <div *ngIf="registerationForm.get('name')?.errors &&registerationForm.get('name')?.touched"
+            class=" alert alert-danger">
+            <p class="m-0" *ngIf="registerationForm.get('name')?.getError('required')">Name is required</p>
+            <p class="m-0" *ngIf="registerationForm.get('name')?.getError('minlength')">Min Length is 3 chars</p>
+            <p class="m-0" *ngIf="registerationForm.get('name')?.getError('maxlength')">Max length is 10 chars</p>
+        </div>
+
+        <div>
+            <label for="email">Email:</label>
+            <input formControlName="email" type="email" id="email" class="form-control mb-3">
+        </div>
+        <div *ngIf="registerationForm.get('email')?.errors &&registerationForm.get('email')?.touched"
+            class=" alert alert-danger">
+            <p class="m-0" *ngIf="registerationForm.get('email')?.getError('required')">Email is required</p>
+            <p class="m-0" *ngIf="registerationForm.get('email')?.getError('email')">Enter a valid Email</p>
+        </div>
+
+        <div>
+            <label for="password">password:</label>
+            <input formControlName="password" type="password" id="password" class="form-control mb-3">
+        </div>
+        <div *ngIf="registerationForm.get('password')?.errors &&registerationForm.get('password')?.touched"
+            class=" alert alert-danger">
+            <p class="m-0" *ngIf="registerationForm.get('password')?.getError('required')">Password is required</p>
+            <p class="m-0" *ngIf="registerationForm.get('password')?.getError('pattern')">Pattern should be ....</p>
+        </div>
+
+        <div>
+            <label for="rePassword">rePassword:</label>
+            <input formControlName="rePassword" type="password" id="rePassword" class="form-control mb-3">
+        </div>
+        <div *ngIf="registerationForm.get('rePassword')?.errors &&registerationForm.get('rePassword')?.touched"
+            class=" alert alert-danger">
+            <p class="m-0" *ngIf="registerationForm.get('rePassword')?.getError('required')">rePassword is required</p>
+            <p class="m-0" *ngIf="registerationForm.get('rePassword')?.getError('pattern')">Pattern should be ....</p>
+        </div>
+
+        <div>
+            <label for="Phone">Phone:</label>
+            <input formControlName="phone" type="tel" id="Phone" class="form-control mb-3">
+        </div>
+        <div *ngIf="registerationForm.get('phone')?.errors &&registerationForm.get('phone')?.touched"
+            class=" alert alert-danger">
+            <p class="m-0" *ngIf="registerationForm.get('phone')?.getError('required')">Phone number is required</p>
+            <p class="m-0" *ngIf="registerationForm.get('phone')?.getError('pattern')">PHone number must be ....</p>
+        </div>
+
+        <button *ngIf="!loadingFlag" [disabled]="registerationForm.invalid" type="submit"
+            class="btn btn-success d-block ms-auto">Submit</button>
+        <button *ngIf="loadingFlag" type="button" class="btn btn-success d-block ms-auto">
+            <i class="fa-solid fa-spinner fa-spin"></i>
+        </button>
+    </form>
+</div>
